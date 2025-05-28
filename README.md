@@ -27,7 +27,7 @@ Edit **.env** file to set username and password. These will be hashed when first
 
 Up
 ```
-docker compose -f docker-compose.prod.yml up
+docker compose -f docker-compose.prod.yml up --build --force-recreate
 ```
 Ready!
 
@@ -41,8 +41,7 @@ git submodule update --init --recursive
 ```
 Down & Up
 ```
-docker compose -f docker-compose.prod.yml down --remove-orphans
-docker compose -f docker-compose.prod.yml up -d --build
+docker compose -f docker-compose.prod.yml up -d --build --force-recreate
 ```
 # Demo
 Requires *git* and *docker*
@@ -57,13 +56,19 @@ cd umono-demo
 ```
 Init and update submodules
 ```
+git checkout $(git tag -l "v0.*" | sort -V | tail -n 1)
 git submodule update --init --recursive
 ```
 Up
 ```
-docker compose -f docker-compose.demo.yml up
+docker compose -f docker-compose.demo.yml up --build --force-recreate
 ```
-Ready! username and password are **admin**
+Ready!
 ```
 http://127.0.0.1:8999/admin
+```
+Default credentials:
+```
+username: admin
+password: admin
 ```
